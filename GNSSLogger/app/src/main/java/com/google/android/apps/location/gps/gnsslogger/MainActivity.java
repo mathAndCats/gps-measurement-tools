@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity
   private static final String TAG = "MainActivity";
 
   private GnssContainer mGnssContainer;
+  private FusedContainer mFusedContainer;
   private UiLogger mUiLogger;
   private RealTimePositionVelocityCalculator mRealTimePositionVelocityCalculator;
   private FileLogger mFileLogger;
@@ -264,9 +265,12 @@ public class MainActivity extends AppCompatActivity
             mFileLogger,
             mRealTimePositionVelocityCalculator,
             mAgnssUiLogger);
+
+    mFusedContainer = new FusedContainer(getApplicationContext(), mFileLogger);
     mFragments = new Fragment[NUMBER_OF_FRAGMENTS];
     SettingsFragment settingsFragment = new SettingsFragment();
     settingsFragment.setGpsContainer(mGnssContainer);
+    settingsFragment.setFusedContainer(mFusedContainer);
     settingsFragment.setRealTimePositionVelocityCalculator(mRealTimePositionVelocityCalculator);
     settingsFragment.setAutoModeSwitcher(this);
     mFragments[FRAGMENT_INDEX_SETTING] = settingsFragment;

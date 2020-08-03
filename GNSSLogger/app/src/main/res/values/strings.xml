@@ -13,6 +13,7 @@
     <string name="title_plot">Plot</string>
 
     <string name="location_label">Location</string>
+    <string name="fused_label">Fused Location</string>
     <string name="measurements_label">Measurements</string>
     <string name="nav_msg_label">Navigation Messages</string>
     <string name="gnss_status_label">GnssStatus</string>

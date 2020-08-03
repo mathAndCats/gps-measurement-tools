@@ -30,6 +30,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
+import android.support.annotation.RequiresApi;
 import android.support.v4.BuildConfig;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
@@ -236,23 +237,31 @@ public class FileLogger implements GnssListener {
   @Override
   public void onProviderDisabled(String provider) {}
 
+  @RequiresApi(api = Build.VERSION_CODES.O)
   @Override
   public void onLocationChanged(Location location) {
-    if (location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
+    //if (location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
+    if (true) {
       synchronized (mFileLock) {
         if (mFileWriter == null) {
           return;
         }
+
+        location.getSpeedAccuracyMetersPerSecond();
         String locationStream =
             String.format(
                 Locale.US,
-                "Fix,%s,%f,%f,%f,%f,%f,%d",
+                "Fix,%s,%f,%f,%f,%f,%f,%f,%f,%f,%f,%d",
                 location.getProvider(),
                 location.getLatitude(),
                 location.getLongitude(),
                 location.getAltitude(),
                 location.getSpeed(),
+                location.getBearing(),
                 location.getAccuracy(),
+                location.getVerticalAccuracyMeters(),
+                location.getSpeedAccuracyMetersPerSecond(),
+                location.getBearingAccuracyDegrees(),
                 location.getTime());
         try {
           mFileWriter.write(locationStream);

@@ -5,7 +5,7 @@ classdef GnssThresholds
     %Open Source code for processing Android GNSS Measurements
    
     properties (Constant) %listed alphabetically
-        MAXDELPOSFORNAVM = 20; %maximum position can change on one iteration of 
+        MAXDELPOSFORNAVM = 1; % 20; %maximum position can change on one iteration of 
         % nav solution without los vector changing by more than 1 microradian
         MAXPRRUNCMPS = 10; %max pseudorange rate (Doppler) uncertainty.
         %bigger values may just be the search bin size, thus not valid for nav.

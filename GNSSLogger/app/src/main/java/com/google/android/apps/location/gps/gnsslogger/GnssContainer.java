@@ -38,7 +38,7 @@ public class GnssContainer {
   public static final String TAG = "GnssLogger";
 
   private static final long LOCATION_RATE_GPS_MS = TimeUnit.SECONDS.toMillis(1L);
-  private static final long LOCATION_RATE_NETWORK_MS = TimeUnit.SECONDS.toMillis(60L);
+  private static final long LOCATION_RATE_NETWORK_MS = TimeUnit.SECONDS.toMillis(1L);
 
   private boolean mLogLocations = true;
   private boolean mLogNavigationMessages = true;

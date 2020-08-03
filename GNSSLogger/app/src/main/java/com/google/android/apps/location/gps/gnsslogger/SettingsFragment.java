@@ -57,6 +57,8 @@ public class SettingsFragment extends Fragment {
   protected static String PREFERENCE_KEY_AUTO_SCROLL =  "autoScroll";
 
   private GnssContainer mGpsContainer;
+  private FusedContainer mFusedContainer;
+
   private HelpDialog helpDialog;
 
   /**
@@ -75,6 +77,10 @@ public class SettingsFragment extends Fragment {
 
   public void setGpsContainer(GnssContainer value) {
     mGpsContainer = value;
+  }
+
+  public void setFusedContainer(FusedContainer value) {
+      mFusedContainer = value;
   }
 
   /** Set up {@link MainActivity} to receive update from AR result broadcast */
@@ -114,6 +120,27 @@ public class SettingsFragment extends Fragment {
             }
           }
         });
+
+      final Switch registerFused = (Switch) view.findViewById(R.id.register_fused);
+      final TextView registerFusedLabel = (TextView) view.findViewById(R.id.register_fused_label);
+      //set the switch to OFF
+      registerFused.setChecked(false);
+      registerFusedLabel.setText("Switch is OFF");
+      registerFused.setOnCheckedChangeListener(
+              new OnCheckedChangeListener() {
+
+                  @Override
+                  public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                      if (isChecked) {
+                          mFusedContainer.registerFusedLocation();
+                          registerFusedLabel.setText("Switch is ON");
+                      } else {
+                           mFusedContainer.unregisterFusedLocation();
+                          registerFusedLabel.setText("Switch is OFF");
+                      }
+                  }
+              });
 
     final Switch registerMeasurements = (Switch) view.findViewById(R.id.register_measurements);
     final TextView registerMeasurementsLabel =
